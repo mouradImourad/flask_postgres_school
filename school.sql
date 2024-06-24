@@ -60,22 +60,8 @@ INSERT INTO teachers(first_name, last_name, age, subject_id) VALUES
 ('Sarah', 'Johnson', 28, 1),
 ('Robert', 'Williams', 35, 4),
 ('Emily', 'Anderson', 30, 5),
-('Michael', 'Smith', 29, 4),
-('Olivia', 'Johnson', 31, 5),
-('Matthew', 'Brown', 27, 3),
-('John', 'Doe', 29, 1),
-('Laura', 'Clark', 30, 2),
-('Rebecca', 'Wilson', 33, 2),
-('Chris', 'Evans', 31, 1),
-('Anna', 'Robinson', 29, 1),
-('James', 'Moore', 34, 5),
-('Elizabeth', 'White', 28, 3),
-('William', 'Harris', 30, 5),
-('Julia', 'Lewis', 32, 4),
-('Daniel', 'Turner', 29, 3),
-('Grace', 'Parker', 35, 4),
-('Charles', 'Bennett', 28, 2),
-('Sophia', 'Wright', 30, 1);
+('Michael', 'Smith', 29, 4)
+
 
 
 

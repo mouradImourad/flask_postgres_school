@@ -13,27 +13,43 @@ class Student(db.Model):
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
     age = db.Column(db.String(1))
-    subject_id = db.Column(db.String(1))
+    subject_id = db.Column(db.Integer, foreign_key=True)
 
     def to_dict(self):
         return {
-            "student_id":self.student_id,
+            "id":self.student_id,
+            "first_name":self.first_name,
+            "last_name":self.last_name,
+            "age":self.age
+        }
+
+class Teacher(db.Model):
+    __tablename__= 'teachers'
+    teacher_id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50))
+    last_name = db.Column(db.String(50))
+    age = db.Column(db.String(1))
+    subject_id = db.Column(db.Integer, foreign_key=True)
+
+    def to_dict(self):
+        return {
+            "teacher_id":self.teacher_id,
             "first_name":self.first_name,
             "last_name":self.last_name,
             "age":self.age,
             "subject_id":self.subject_id
         }
 
-# class Teacher(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     first_name = db.Column(db.Integer, primary_key=True)
-#     last_name = db.Column(db.String(50))
-#     age = db.Column(db.String(1))
-#     subject = db.Column(db.String(1))
+class Subject(db.Model):
+    __tablename__= 'subjects'
+    subject_id = db.Column(db.Integer, primary_key=True)
+    subject_name = db.Column(db.String(50))
 
-# class Subject(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     subject = db.Column(db.String(50))
+    def to_dict(self):
+        return {
+            "subject_id":self.subject_id,
+            "subject_name":self.subject_name
+        }
 
 @app.route('/students', methods=['GET'])
 def get_students():
@@ -43,32 +59,20 @@ def get_students():
         result.append(student.to_dict())
     return jsonify(result)
 
-# @app.route('/teachers', methods=['GET'])
-# def get_teachers():
-#     teachers = Teacher.query.all()
-#     result = []
-#     for teacher in teachers:
-#         teacher_dict ={
-#             'id': teacher.id, 
-#             'first_name': teacher.first_name, 
-#             'last_name': teacher.last_name, 
-#             'age': teacher.age, 
-#             'subject': teacher.subject
-#         }
-#         result.append(teacher_dict)
-#     print(result)
-#     return jsonify(result)
-# @app.route('/subjects', methods=['GET'])
-# def get_subjects():
-#     subjects = Subject.query.all()
-#     result = []
-#     for subject in subjects:
-#         subject_dict ={
-#             'id': subject.id,
-#             'subject': subject.subject
-#         }
-#         result.append(subject_dict)
-#     print(result)
-#     return jsonify(result)
+@app.route('/teachers', methods=['GET'])
+def get_teachers():
+    teachers = Teacher.query.all()
+    result = []
+    for teacher in teachers:
+        result.append(teacher.to_dict())
+    return jsonify(result)
+
+@app.route('/subjects', methods=['GET'])
+def get_subjects():
+    subjects = Subject.query.all()
+    result = []
+    for subject in subjects:
+       result.append(subject.to_dict())
+    return jsonify(result)
 
 app.run(debug=True)
